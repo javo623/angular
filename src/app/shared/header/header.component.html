@@ -1,0 +1,78 @@
+<header class="ae-container-fluid ae-container-fluid--full rk-header ">
+    <input type="checkbox" id="mobile-menu" class="rk-mobile-menu">
+    <label for="mobile-menu">
+      <svg>
+        <use xlink:href="assets/img/symbols.svg#bar"></use>
+      </svg>
+      <svg>
+        <use xlink:href="assets/img/symbols.svg#bar"></use>
+      </svg>
+      <svg>
+        <use xlink:href="assets/img/symbols.svg#bar"></use>
+      </svg>
+    </label>
+    <div class="ae-container-fluid rk-topbar">
+      <h1 class="rk-logo">
+        <a routerLink="home">{{ infoPaginaService.info.titulo }}</a></h1>
+      <nav class="rk-navigation">
+        <ul class="rk-menu">
+          <li routerLinkActive="active" class="rk-menu__item">
+          <a routerLink="home" class="rk-menu__link">Inicio</a>
+          </li>
+
+          <li routerLinkActive="active" class="rk-menu__item">
+            <a routerLink="about" class="rk-menu__link">Contacto</a>
+          </li>
+
+          <li routerLinkActive="active" class="rk-menu__item">
+            <a routerLink="admin" class="rk-menu__link"
+            *ngIf="authSvc.userDate | async  "
+            >Admin</a>
+          </li>
+          <li routerLinkActive="active" class="rk-menu__item">
+            <a routerLink="event" class="rk-menu__link"
+            *ngIf="authSvc.userDate | async  "
+            >Eventos</a>
+          </li>
+
+
+          <li  class="rk-menu__item">
+            <a class="rk-menu__link" routerLink="login" *ngIf="authSvc.userDate | async; else  showLogin " (click)="onLogout()" >
+              Logout</a>  
+          </li>
+          
+          <ng-template #showLogin>
+          <li routerLinkActive="active" class="rk-menu__item">
+            <a routerLink="login" class="rk-menu__link">Iniciar sesión</a>
+          </li>
+        </ng-template> 
+
+
+
+
+
+          <li routerLinkActive="active" class="rk-menu__item">
+            <a routerLink="regis" class="rk-menu__link">Regístrate</a>
+          </li>
+          
+        </ul>
+
+        
+<!-- busqueda -->
+        <div class="rk-search">
+          <input type="text" 
+                  (keyup.enter)="buscarServicio( txtbuscar.value )"
+                  placeholder="Buscar..."
+                  id="urku-search"
+                  class="rk-search-field"
+                  #txtbuscar>
+
+          <label for="urku-search">
+            <svg>
+              <use xlink:href="assets/img/symbols.svg#icon-search"></use>
+            </svg>
+          </label>
+        </div>
+      </nav>
+    </div>
+  </header>
