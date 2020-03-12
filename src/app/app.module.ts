@@ -32,6 +32,8 @@ import { AngularFireStorageModule, StorageBucket } from '@angular/fire/storage';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NewPostComponent } from './pages/new-post/new-post.component';
+import { EditPostComponent } from './pages/edit-post/edit-post.component';
+import { EditPostModule } from './pages/edit-post/edit-post.module';
 // import { NgbDateFirestoreAdapter } from './services/ngb-date-firestore-adapter.service';
 // import { NgbDateAdapter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -52,7 +54,8 @@ import { NewPostComponent } from './pages/new-post/new-post.component';
     ToolbarComponent,
     ContainerAppComponent,
     ModalComponent,
-    NewPostComponent
+    NewPostComponent,
+    EditPostComponent
 
   ],
   imports: [
@@ -68,6 +71,7 @@ import { NewPostComponent } from './pages/new-post/new-post.component';
     ReactiveFormsModule,
     BrowserModule,
     FormsModule,
+    EditPostModule,
     // NgbModule
   ],
   entryComponents: [ModalComponent],

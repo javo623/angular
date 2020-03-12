@@ -8,7 +8,7 @@
         </a>
     </mat-card-title>
 </mat-card-header>
-<img matCardImage [src]="post.imagen" />
+<img matCardImage [src]="post.image" />
 <mat-card-content >
     <p>
         {{post.descrition}}
@@ -20,10 +20,10 @@
         {{ post.location }}
     </p>
     <p>
-    inicia: {{ post.start_date}}
+    inicia: {{ post.start_date.seconds*1000 | date }}
     </p>
     <p>
-    finaliza: {{ post.end_date }}    
+    finaliza: {{ post.end_date.seconds*1000 | date }}    
     </p>
 
 

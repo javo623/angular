@@ -51,6 +51,7 @@ export class TableComponent implements OnInit, AfterViewInit {
 
   onEditPost(post: PostI) {
     console.log('Edit post', post);
+    this.openDialog(post );
 
   }
   onDeletePost(post: PostI) {
@@ -73,8 +74,15 @@ export class TableComponent implements OnInit, AfterViewInit {
   });
 }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(ModalComponent);
+  openDialog(post?: PostI): void {
+    const config = {
+      data: {
+        message: post ? 'Editar evento' : 'Nuevo evento',
+        content: post
+      }
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, config);
     dialogRef.afterClosed().subscribe(result => {
     console.log(`Dialog result ${result}`);
     });

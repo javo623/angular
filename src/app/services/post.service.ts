@@ -44,8 +44,12 @@ import { AngularFireStorage } from '@angular/fire/storage';
 
     }
 
-    public editPostById(post: PostI) {
-        return this.postsCollection.doc(post.id).update(post);
+    public editPostById(post: PostI, newImage?: FileI) {
+     if (newImage) {
+       this.uploadImage(post, newImage);
+     } else {
+      return this.postsCollection.doc(post.id).update(post);
+     }
     }
 
 
@@ -64,7 +68,11 @@ import { AngularFireStorage } from '@angular/fire/storage';
       image: this.downloadURL,
       fileRef: this.filePath,
       };
-       this.postsCollection.add(postEvent);
+       if (post.id) {
+        return this.postsCollection.doc(post.id).update(postEvent);
+      } else {
+        return this.postsCollection.add(postEvent);
+      }
      }
 
     private uploadImage(post: PostI, image: FileI) {

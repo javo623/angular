@@ -1,0 +1,41 @@
+<div class="new-post-container">
+    <form [formGroup]="editPostForm" (ngSubmit)="editEvent(editPostForm.value)">
+        <mat-form-field>
+            <mat-label>Nombre del evento</mat-label>
+            <input matInput placeholder="name" formControlName="name" >
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Descripción</mat-label>
+            <input matInput placeholder="descrition" formControlName="descrition">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Codigo de vestimenta</mat-label>
+            <input matInput placeholder="dresscode" formControlName="dresscode">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Ubicacion</mat-label>
+            <input matInput placeholder="location" formControlName="location">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Fecha de inicio</mat-label>
+            <input matInput [matDatepicker]="inicio" formControlName="start_date">
+            <mat-datepicker-toggle matSuffix [for]="inicio"></mat-datepicker-toggle>
+            <mat-datepicker #inicio></mat-datepicker>
+        </mat-form-field>                    
+        <mat-form-field>
+            <mat-label>Fecha de termino</mat-label>
+            <input matInput [matDatepicker]="fin" formControlName="end_date">
+            <mat-datepicker-toggle matSuffix [for]="fin"></mat-datepicker-toggle>
+            <mat-datepicker #fin></mat-datepicker>
+          </mat-form-field>          
+          <div class="container-input-file">
+            <label class="custom-file">
+              <input type="file" formControlName="image" (change)="handleImage($event)" />
+              <mat-icon>cloud_upload</mat-icon><span>CHOOSE IMAGE</span>
+            </label> 
+          </div>
+<div class="container-button">
+    <input type="submit" class="mat-flat-button" value="save" [mat-dialog-close]="true">
+</div>
+    </form>
+</div>
