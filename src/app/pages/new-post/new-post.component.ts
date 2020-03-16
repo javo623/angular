@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
 import { PostI } from 'src/app/interfaces/post.interface';
 import { PostService } from 'src/app/services/post.service';
+import { AmazingTimePickerService } from 'amazing-time-picker';
 
 @Component({
   selector: 'app-new-post',
@@ -10,8 +11,10 @@ import { PostService } from 'src/app/services/post.service';
 })
 export class NewPostComponent implements OnInit {
 
+
   private image: any;
-  constructor(private postSvc: PostService) { }
+  constructor(private postSvc: PostService,
+              private atp: AmazingTimePickerService) { }
 
   public newPostForm = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -36,4 +39,9 @@ export class NewPostComponent implements OnInit {
     console.log('IMage', this.image);
   }
 
-}
+  // open() {
+  //   const AmazingTimePicker = this.atp.open();
+  //   AmazingTimePicker.afterClose().subscribe(time => {
+  //     console.log(time);
+  //   });
+  }
