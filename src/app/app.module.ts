@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { AmazingTimePickerModule } from 'amazing-time-picker';
 
 // Rutas
 import { AppRoutingModule } from './app-routing.module';
@@ -72,6 +73,7 @@ import { EditPostModule } from './pages/edit-post/edit-post.module';
     BrowserModule,
     FormsModule,
     EditPostModule,
+    AmazingTimePickerModule
     // NgbModule
   ],
   entryComponents: [ModalComponent],
