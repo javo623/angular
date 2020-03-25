@@ -18,11 +18,9 @@ import { AboutComponent } from './pages/about/about.component';
 import { ItemComponent } from './pages/item/item.component';
 import { SearchComponent } from './pages/search/search.component';
 import { RegisterComponent } from './user/register/register.component';
-import { EventComponent } from './pages/event/event.component';
 import { MaterialModule } from './material.module';
 import { environment } from 'src/environments/environment';
 import { ModalComponent } from './shared/modal/modal.component';
-import { PostComponent } from './user/post/post.component';
 import { ToolbarComponent } from './shared/toolbar/toolbar.component';
 import { ContainerAppComponent } from './pages/container-app/container-app.component';
 
@@ -35,6 +33,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { NewPostComponent } from './pages/new-post/new-post.component';
 import { EditPostComponent } from './pages/edit-post/edit-post.component';
 import { EditPostModule } from './pages/edit-post/edit-post.module';
+import { DetailsComponent } from './pages/details/details.component';
+import { SubeventsComponent } from './pages/subevents/subevents.component';
+import { TablesubComponent } from './shared/tablesub/tablesub.component';
 // import { NgbDateFirestoreAdapter } from './services/ngb-date-firestore-adapter.service';
 // import { NgbDateAdapter, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -50,13 +51,14 @@ import { EditPostModule } from './pages/edit-post/edit-post.module';
     ItemComponent,
     SearchComponent,
     RegisterComponent,
-    EventComponent,
-    PostComponent,
     ToolbarComponent,
     ContainerAppComponent,
     ModalComponent,
     NewPostComponent,
-    EditPostComponent
+    EditPostComponent,
+    DetailsComponent,
+    SubeventsComponent,
+    TablesubComponent
 
   ],
   imports: [
@@ -73,7 +75,8 @@ import { EditPostModule } from './pages/edit-post/edit-post.module';
     BrowserModule,
     FormsModule,
     EditPostModule,
-    AmazingTimePickerModule
+    AmazingTimePickerModule,
+
     // NgbModule
   ],
   entryComponents: [ModalComponent],

@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     .loginByEmail(form)
     .then( res => {
       console.log('Succesfully ', res);
-      this.router.navigate(['/event']);
+      this.router.navigate(['/events']);
     })
     .catch(err => console.log('Error', err));
   }

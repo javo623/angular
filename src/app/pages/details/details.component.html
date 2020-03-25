@@ -1,0 +1,13 @@
+<div class="container" *ngIf="post$ | async as post">
+    <mat-card class="post-card">
+      <img matCardImage class="align-center" [src]="" />
+      <mat-card-content>
+        <mat-card-title>
+          {{ post.name }}
+        </mat-card-title>
+        <p class="content">
+          <!-- {{ post.descrition }} -->
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>

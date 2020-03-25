@@ -39,9 +39,10 @@ export class NewPostComponent implements OnInit {
     console.log('IMage', this.image);
   }
 
-  // open() {
-  //   const AmazingTimePicker = this.atp.open();
-  //   AmazingTimePicker.afterClose().subscribe(time => {
-  //     console.log(time);
-  //   });
+   open() {
+     const AmazingTimePicker = this.atp.open();
+     AmazingTimePicker.afterClose().subscribe(time => {
+     console.log(time);
+    });
   }
+}

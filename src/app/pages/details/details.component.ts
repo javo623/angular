@@ -1,25 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostService } from 'src/app/services/post.service';
-import { Observable } from 'rxjs';
 import { PostI } from 'src/app/interfaces/post.interface';
-
+import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-post',
-  templateUrl: './post.component.html',
-  styleUrls: ['./post.component.scss']
+  selector: 'app-details',
+  templateUrl: './details.component.html',
+  styleUrls: ['./details.component.scss']
 })
-export class PostComponent implements OnInit {
-
+export class DetailsComponent implements OnInit {
   public post$: Observable<PostI>;
 
-  constructor( private route: ActivatedRoute,
-               private postSvg: PostService) { }
+  constructor(private route: ActivatedRoute, private postSvc: PostService) { }
 
   ngOnInit() {
     const idPost = this.route.snapshot.params.id;
-    this.post$ = this.postSvg.getOnePost(idPost);
+    this.post$ = this.postSvc.getOnePost(idPost);
   }
-
 }

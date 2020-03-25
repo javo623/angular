@@ -5,9 +5,7 @@ import { AboutComponent } from './pages/about/about.component';
 import { ItemComponent } from './pages/item/item.component';
 import { SearchComponent } from './pages/search/search.component';
 import { RegisterComponent } from './user/register/register.component';
-import { EventComponent } from './pages/event/event.component';
-import { PostComponent } from './user/post/post.component';
-import { ContainerAppComponent } from './pages/container-app/container-app.component';
+import { SubeventsComponent } from './pages/subevents/subevents.component';
 
 
 const routes: Routes = [
@@ -16,10 +14,11 @@ const routes: Routes = [
 {path: 'item/:id', component: ItemComponent},
 {path: 'search/:termino', component: SearchComponent},
 {path: 'regis', component: RegisterComponent},
-{path: 'event', component: EventComponent},
-{path: 'post/:id', component: PostComponent},
 { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
-{ path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) }
+{ path: 'login', loadChildren: () => import('./auth/login/login.module').then(m => m.LoginModule) },
+{path: '', redirectTo: '/home', pathMatch: 'full'},
+{ path: 'events', loadChildren: () => import('./pages/events/events.module').then(m => m.EventsModule) },
+{path: 'subevents/:id', component: SubeventsComponent }
 ];
 
 @NgModule({

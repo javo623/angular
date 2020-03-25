@@ -2,6 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatTableDataSource} from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import {MatPaginator} from '@angular/material/paginator';
+import { PostServiceSub } from 'src/app/services/postsub.service';
+import swal from 'sweetalert2';
+import { MatDialog } from '@angular/material';
+import { ModalComponent } from '../modal/modal.component';
+import { PostSub } from 'src/app/interfaces/postsub.iterface';
 
 export interface PeriodicElement {
   name: string;
@@ -10,18 +15,6 @@ export interface PeriodicElement {
   symbol: string;
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 
 
 @Component({
@@ -30,16 +23,23 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./tablesub.component.scss']
 })
 export class TablesubComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
+  displayedColumns: string[] = ['name', 'location', 'description', 'actions'];
+  dataSource = new MatTableDataSource();
   @ViewChild(MatPaginator, {static: true})paginator: MatPaginator;
   @ViewChild(MatSort, {static: true})sort: MatSort;
 
 
 
-  constructor() { }
+  constructor(private postSvc: PostServiceSub,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.postSvc.getAllPosts()
+    .subscribe( posts => this.dataSource.data = posts );
+  }
+
+  // tslint:disable-next-line: use-lifecycle-interface
+  ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -47,4 +47,49 @@ export class TablesubComponent implements OnInit {
   applyFilter(filterValue: string) {
   this.dataSource.filter = filterValue.trim().toLowerCase();
 }
+
+  onNewPost() {
+  this.openDialog();
+}
+
+  onEditPost(post: PostSub) {
+    console.log('Edit post', post);
+    this.openDialog(post );
+
+  }
+  onDeletePost(post: PostSub) {
+  swal.fire({
+    title: '¿Estas seguro?',
+    text: 'Una vez eliminado no se puede recuperar el registro',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Eliminar'
+  }).then (result => {
+    if (result.value ) {
+      this.postSvc.deletePostById(post).then(() => {
+        swal.fire('Borrar', 'Tu evento se elimino.', 'success');
+      }).catch((error) => {swal.fire('Error', 'Tu evento no pudo ser eliminado.', 'error');
+    })
+      ;
+    }
+  });
+}
+
+  openDialog(post?: PostSub): void {
+    const config = {
+      data: {
+        message: post ? 'Editar evento' : 'Nuevo evento',
+        content: post
+      }
+    };
+
+    const dialogRef = this.dialog.open(ModalComponent, config);
+    dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog result ${result}`);
+    });
+  }
+
+
 }

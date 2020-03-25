@@ -13,7 +13,7 @@ import { ServicioDescripcion } from 'src/app/interfaces/servicio-descripcion.int
 export class ItemComponent implements OnInit {
 
   servicio: ServicioDescripcion;
- id: string;
+  id: string;
 
   constructor( private route: ActivatedRoute,
                public servicioService: ServiciosService ) { }

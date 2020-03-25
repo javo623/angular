@@ -5,6 +5,8 @@ import { map, finalize } from 'rxjs/operators';
 import { PostI } from 'src/app/interfaces/post.interface';
 import {FileI} from 'src/app/interfaces/file.interface';
 import { AngularFireStorage } from '@angular/fire/storage';
+import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -14,8 +16,13 @@ import { AngularFireStorage } from '@angular/fire/storage';
       private filePath: any;
       private downloadURL: Observable<string>;
 
+
+
     constructor(private afs: AngularFirestore,
-                private storage: AngularFireStorage
+                private storage: AngularFireStorage,
+                private http: HttpClient,
+                private route: ActivatedRoute,
+                private postSvc: PostService
         ) {
         this.postsCollection = afs.collection<PostI>('events');
     }
@@ -36,7 +43,7 @@ import { AngularFireStorage } from '@angular/fire/storage';
     }
 
     public getOnePost(id: PostI): Observable<PostI> {
-        return this.afs.doc<PostI>(`posts/${id}`).valueChanges();
+        return this.afs.doc<PostI>(`event/${id}`).valueChanges();
     }
 
     public deletePostById(post: PostI ) {
@@ -89,4 +96,5 @@ import { AngularFireStorage } from '@angular/fire/storage';
           })
         ).subscribe();
     }
+
   }

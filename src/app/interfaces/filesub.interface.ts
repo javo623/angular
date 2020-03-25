@@ -1,4 +1,4 @@
-export interface FileI {
+export interface FileSub {
     name: string;
     imageFile: File;
     size: string;
